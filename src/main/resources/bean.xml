@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+       default-init-method="init"
+       default-destroy-method="destroy"
+>
+
+    <bean id="person" class="com.ft.test.Person">
+        <property name="name" value="normal"></property>
+        <property name="age" value="20"></property>
+    </bean>
+
+    <bean id="personSingleton" class="com.ft.test.Person" scope="singleton">
+        <property name="name" value="singleton"></property>
+        <property name="age" value="22"></property>
+    </bean>
+
+    <bean id="personPrototype" class="com.ft.test.Person" scope="prototype">
+        <property name="name" value="prototype"></property>
+        <property name="age" value="24"></property>
+    </bean>
+
+    <bean id="personInitDestroy" class="com.ft.test.Person" scope="prototype">
+        <property name="name" value="initdestroy"></property>
+        <property name="age" value="24"></property>
+    </bean>
+
+    <bean id="food" class="com.ft.test.Food">
+        <property name="name" value="apple"></property>
+        <property name="color" value="red"></property>
+    </bean>
+    <bean id="eatfood" class="com.ft.test.EatFood">
+        <property name="fd" ref="food"></property>
+    </bean>
+    <bean id="eatfoodConstructor" class="com.ft.test.EatFood">
+        <constructor-arg ref="food"></constructor-arg>
+    </bean>
+</beans>
