@@ -87,4 +87,14 @@ public class TestPerson {
 
         aac.registerShutdownHook();
     }
+
+    @Test
+    public void testInOutBean() {
+        AbstractApplicationContext aac = new ClassPathXmlApplicationContext("bean.xml");
+        EatFood ef = (EatFood)aac.getBean("eatfoodOuterBean");
+        Food fd = ef.getFd();
+        System.out.println(fd.getName() + ", " + fd.getColor());
+
+        aac.registerShutdownHook();
+    }
 }

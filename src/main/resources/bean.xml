@@ -36,4 +36,45 @@
     <bean id="eatfoodConstructor" class="com.ft.test.EatFood">
         <constructor-arg ref="food"></constructor-arg>
     </bean>
+    <bean id="eatfoodOuterBean" class="com.ft.test.EatFood">
+        <property name="fd">
+            <bean id="innerbean" class="com.ft.test.Food">
+                <property name="name" value="orange"></property>
+                <property name="color" value="yellow"></property>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="collection" class="com.ft.test.CollectionBean">
+        <property name="listInt">
+            <list>
+                <value type="java.lang.String">"hello"</value>
+                <value>"haha"</value>
+                <value>"tom"</value>
+            </list>
+        </property>
+        <property name="setInt">
+            <set>
+                <value>8</value>
+                <value>10</value>
+            </set>
+        </property>
+        <property name="mapIntStr">
+            <map value-type="com.ft.test.Person">
+                <entry key="5" value-ref="person"/>
+                <entry key="8">
+                    <bean id="b1" class="com.ft.test.Person">
+                        <property name="name" value="b1"/>
+                        <property name="age" value="20" />
+                    </bean>
+                </entry>
+            </map>
+        </property>
+        <property name="prot">
+            <props>
+                <prop key="mon">Monday</prop>
+                <prop key="tue">Tuesday</prop>
+            </props>
+        </property>
+    </bean>
 </beans>
