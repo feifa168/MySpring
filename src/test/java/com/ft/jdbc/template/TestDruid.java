@@ -8,7 +8,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.List;
 
-public class Druid {
+public class TestDruid {
     static JdbcEmployee jdbcEmployee;
     static {
         String xmlFile = "druid.xml";
