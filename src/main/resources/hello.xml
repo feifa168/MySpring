@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:aop="http://www.springframework.org/schema/aop"
+        xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
+
+
+    <!-- 目标类 -->
+    <bean id="helloService" class="com.ft.test.hello.HelloService" />
+
+    <bean id="helloAspect" class="com.ft.test.hello.HelloAspect" />
+
+
+    <!-- 配置切面 -->
+    <!-- aop:advisor，是有顺序的，必须放在aop:pointcut之后 -->
+    <aop:config>
+        <aop:pointcut id="helloPointcut" expression="execution(* com.ft.test.hello..*.*(..))" />
+
+        <aop:aspect ref="helloAspect">
+            <!--以下使用了两种方法定义切入点  pointcut-ref和pointcut-->
+            <aop:before pointcut-ref="helloPointcut" method="beforeAdvice" />
+            <aop:after pointcut="execution(* com.ft.test.hello..*.*(..))" method="afterFinallyAdvice" />
+        </aop:aspect>
+
+    </aop:config>
+</beans>

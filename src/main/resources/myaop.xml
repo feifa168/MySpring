@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
+            <!--http://www.springframework.org/schema/beans-->
+            <!--http://www.springframework.org/schema/beans/spring-beans.xsd-->
+            <!--http://www.springframework.org/schema/beans/spring-beans-3.0.xsd-->
+            <!--http://www.springframework.org/schema/aop-->
+            <!--http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">-->
+
+    <aop:config>
+        <aop:aspect id="a1" ref="aopmsg">
+            <!--<aop:pointcut id="pc" expression="execution(* com.ft.*.*(..))"/>-->
+            <aop:pointcut id="pc" expression="execution(* com.ft.test..*.*(..))"/>
+            <aop:before method="mybefore" pointcut-ref="pc"/>
+            <aop:after method="myafter" pointcut-ref="pc"/>
+        </aop:aspect>
+    </aop:config>
+
+    <bean id="aopmsg" class="com.ft.test.myaop1.AopMessage"/>
+
+    <bean id="aopb" class="com.ft.test.myaop1.AopBean">
+        <property name="name" value="aop1"/>
+        <property name="ps" ref="person"/>
+    </bean>
+
+    <bean id="person" class="com.ft.test.Person">
+        <property name="name" value="normal"></property>
+        <property name="age" value="20"></property>
+    </bean>
+</beans>

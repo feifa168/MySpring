@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:aop="http://www.springframework.org/schema/aop"
+        xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
+
+    <bean id="myaspect" class="com.ft.test.myaop.AopAspect"/>
+
+    <aop:config>
+        <aop:pointcut expression="execution(* com.ft.test.myaop.MyAop.show(..)) and args(name,age)" id="show"/> <!-- 带参 切点-->
+        <aop:aspect ref="myaspect">
+            <aop:before method="beforeHandler" pointcut-ref="show" arg-names="name,age" /> <!-- 前置通知，传递参数 -->
+        </aop:aspect>
+    </aop:config>
+
+    <bean id="myaop2" class="com.ft.test.myaop.MyAopImpl"/>
+</beans>

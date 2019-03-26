@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:jdbcInfo.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="dataSourceProperties" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+          destroy-method="close"
+          p:driverClass="${jdbc.driverClass}"
+          p:jdbcUrl="${jdbc.url}"
+          p:user="${jdbc.user}"
+          p:password="${jdbc.password}"
+          p:maxPoolSize="${jdbc.maxPoolSize}"
+          p:minPoolSize="${jdbc.minPoolSize}"
+          p:initialPoolSize="${jdbc.initialPoolSize}"
+          p:maxIdleTime="${jdbc.maxIdleTime}"
+          p:acquireIncrement="${jdbc.acquireIncrement}"
+          p:maxStatements="${jdbc.maxStatements}"
+          p:idleConnectionTestPeriod="${jdbc.idleConnectionTestPeriod}"
+    />
+
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+        <property name="jdbcUrl" value="jdbc:mysql://172.16.39.251:12239/test?characterEncoding=UTF-8"/>
+        <property name="user" value="root"/>
+        <property name="password" value="123456"/>
+        <property name="initialPoolSize" value="3"/>
+        <property name="maxPoolSize" value="10"/>
+        <property name="maxStatements" value="100"/>
+        <property name="acquireIncrement" value="2"/>
+    </bean>
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSourceProperties"/>
+    </bean>
+
+    <bean id="jdbcEmployee" class="com.ft.test.jdbctemplate.JdbcEmployee">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+</beans>

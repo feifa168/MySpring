@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx.xsd">
+    
+    <bean id="serviceAop" class="com.ft.test.myxmlservice.MyXmlServiceAop"></bean>
+    
+    <aop:config>
+        <aop:pointcut expression="execution(* com.ft.test.myxmlservice.MyXmlService.handlerXml(..)) and args(name,age)" id="handlerXml1"/> <!-- 带参 切点-->
+        <aop:pointcut expression="execution(* com.ft.test.myxmlservice.MyXmlService.handlerXml(..))" id="handlerXml2"/> <!-- 不带参 切点 -->
+        <aop:aspect ref="serviceAop">
+            <aop:before method="beforeHandler" pointcut-ref="handlerXml1" arg-names="name,age" /> <!-- 前置通知，传递参数 -->
+            <aop:around method="aroundHandler" pointcut-ref="handlerXml2"/> <!-- 环绕通知 -->
+            <aop:after method="afterHandler" pointcut-ref="handlerXml2"/> <!-- 后置通知 -->
+            <aop:after-returning method="returnHandler" pointcut-ref="handlerXml2" returning="name"/> <!-- 返回通知 -->
+            <aop:after-throwing method="throwExceptionHandler" throwing="ex" pointcut-ref="handlerXml2"/> <!-- 异常通知 -->
+        </aop:aspect>
+    </aop:config>
+    
+    <bean id="myXmlService" class="com.ft.test.myxmlservice.MyXmlServiceImpl"></bean>
+</beans>

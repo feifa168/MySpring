@@ -10,7 +10,6 @@ public class EatFood {
     public Food getFd() {
         return fd;
     }
-
     public void setFd(Food fd) {
         this.fd = fd;
     }

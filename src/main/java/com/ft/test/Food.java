@@ -19,4 +19,12 @@ public class Food {
     public void setColor(String color) {
         this.color = color;
     }
+
+    @Override
+    public String toString() {
+        return name+","+color;
+    }
+    public void show() {
+        System.out.println(name + ", " + color);
+    }
 }

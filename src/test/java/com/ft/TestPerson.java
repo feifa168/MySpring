@@ -6,21 +6,21 @@ import com.ft.test.Person;
 
 import org.junit.Test;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
-import org.springframework.core.io.ClassPathResource;
+//import org.springframework.beans.factory.xml.XmlBeanFactory;
+//import org.springframework.context.support.FileSystemXmlApplicationContext;
+//import org.springframework.core.io.ClassPathResource;
 
 public class TestPerson {
-    @Test
-    public void testBeanFactory() {
-        // 不建议使用，已过时，此处纯粹是测试
-        XmlBeanFactory xf = new XmlBeanFactory(new ClassPathResource("bean.xml"));
-        Person p = (Person)xf.getBean("person");
-        p.show();
-    }
+//    @Test
+//    public void testBeanFactory() {
+//        // 不建议使用，已过时，此处纯粹是测试
+//        XmlBeanFactory xf = new XmlBeanFactory(new ClassPathResource("bean.xml"));
+//        Person p = (Person)xf.getBean("person");
+//        p.show();
+//    }
 
     @Test
     public void testPerson() {

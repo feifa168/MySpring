@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+       default-init-method="init"
+       default-destroy-method="destroy"
+>
+    <bean id="fd" class="com.ft.test.Food">
+        <property name="name" value="orange"/>
+        <property name="color" value="yellow"/>
+    </bean>
+    <bean id="fd2" class="com.ft.test.Food">
+        <property name="name" value="apple"/>
+        <property name="color" value="red"/>
+    </bean>
+
+    <bean id="byname" class="com.ft.test.EatFood" autowire="byName"/>
+    <bean id="byname2" class="com.ft.test.EatFood" autowire="byName">
+        <property name="fd" ref="fd2"/>
+    </bean>
+
+    <!--<bean id="bytype" class="com.ft.test.EatFood" autowire="byType"/>-->
+    <bean id="bytype2" class="com.ft.test.EatFood" autowire="byType">
+        <property name="fd" ref="fd2"/>
+    </bean>
+
+    <bean id="byconstructor" class="com.ft.test.EatFood" autowire="constructor"/>
+    <bean id="byconstructor2" class="com.ft.test.EatFood" autowire="constructor">
+        <constructor-arg ref="fd2"/>
+    </bean>
+</beans>
